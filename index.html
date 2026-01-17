@@ -1,0 +1,295 @@
+<!DOCTYPE html>
+<html lang="sq">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>GENTI TERM | Instalime Profesionale</title>
+    
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;600;700;800&display=swap" rel="stylesheet">
+    
+    <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
+
+    <style>
+        :root {
+            --blue: #007aff;
+            --red: #ff3b30;
+            --bg: #000000;
+            --card-bg: rgba(22, 22, 23, 0.6);
+            --text-main: #ffffff;
+            --text-dim: #86868b;
+        }
+
+        * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Plus Jakarta Sans', sans-serif; }
+        
+        body { 
+            background-color: var(--bg); 
+            color: var(--text-main); 
+            overflow-x: hidden;
+            scroll-behavior: smooth;
+        }
+
+        /* --- Custom Scrollbar --- */
+        ::-webkit-scrollbar { width: 8px; }
+        ::-webkit-scrollbar-track { background: #000; }
+        ::-webkit-scrollbar-thumb { background: #333; border-radius: 10px; }
+
+        /* --- Navigation --- */
+        nav {
+            position: fixed;
+            top: 0; width: 100%;
+            padding: 20px 8%;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            z-index: 1000;
+            transition: 0.4s;
+            backdrop-filter: blur(20px);
+            border-bottom: 1px solid rgba(255,255,255,0.05);
+        }
+        
+        .nav-logo { font-weight: 800; font-size: 1.4rem; letter-spacing: -1px; }
+        .nav-genti { color: var(--blue); }
+        .nav-term { color: var(--red); }
+
+        .nav-links a {
+            color: var(--text-main);
+            text-decoration: none;
+            font-size: 0.8rem;
+            font-weight: 600;
+            margin-left: 30px;
+            opacity: 0.7;
+            transition: 0.3s;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+        .nav-links a:hover { opacity: 1; color: var(--blue); }
+
+        /* --- Hero Section --- */
+        .hero {
+            height: 100vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+            background: radial-gradient(circle at center, #0a0a0b 0%, #000 100%);
+            padding: 0 10%;
+        }
+
+        .hero-brand {
+            font-size: clamp(4rem, 16vw, 13rem);
+            font-weight: 800;
+            line-height: 0.85;
+            letter-spacing: -6px;
+            margin-bottom: 25px;
+            text-transform: uppercase;
+        }
+
+        .genti-text { 
+            color: var(--blue); 
+            text-shadow: 0 0 50px rgba(0, 122, 255, 0.4);
+        }
+
+        .term-text { 
+            color: var(--red); 
+            text-shadow: 0 0 50px rgba(255, 59, 48, 0.4);
+        }
+
+        .hero-tag {
+            font-size: 1.1rem;
+            color: var(--text-dim);
+            font-weight: 400;
+            letter-spacing: 6px;
+            text-transform: uppercase;
+            margin-top: 10px;
+        }
+
+        /* --- Services Section --- */
+        section { padding: 120px 10%; }
+        
+        .section-label {
+            color: var(--blue);
+            font-weight: 700;
+            font-size: 0.8rem;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            display: block;
+            margin-bottom: 10px;
+        }
+
+        .section-title {
+            font-size: clamp(2.5rem, 5vw, 4rem);
+            font-weight: 800;
+            letter-spacing: -2px;
+            margin-bottom: 60px;
+        }
+
+        .services-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+            gap: 25px;
+        }
+
+        .service-card {
+            background: var(--card-bg);
+            padding: 50px;
+            border-radius: 40px;
+            border: 1px solid rgba(255,255,255,0.04);
+            transition: 0.5s cubic-bezier(0.2, 0.8, 0.2, 1);
+            backdrop-filter: blur(10px);
+        }
+
+        .service-card:hover {
+            transform: translateY(-12px);
+            border-color: var(--blue);
+            background: rgba(255,255,255,0.06);
+        }
+
+        .service-card h3 { font-size: 1.8rem; margin-bottom: 15px; font-weight: 700; }
+        .service-card p { color: var(--text-dim); line-height: 1.6; font-size: 1.05rem; }
+
+        /* --- Partners --- */
+        .partners {
+            text-align: center;
+            background: #050505;
+            padding: 80px 10%;
+        }
+        .partner-list {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 60px;
+            flex-wrap: wrap;
+            opacity: 0.3;
+            font-weight: 800;
+            font-size: 1.6rem;
+            margin-top: 30px;
+        }
+
+        /* --- WhatsApp Floating Button --- */
+        .whatsapp-btn {
+            position: fixed;
+            bottom: 35px;
+            right: 35px;
+            background: #25d366;
+            color: white;
+            padding: 18px 32px;
+            border-radius: 100px;
+            text-decoration: none;
+            font-weight: 700;
+            font-size: 0.9rem;
+            box-shadow: 0 15px 35px rgba(37, 211, 102, 0.3);
+            z-index: 9999;
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            transition: 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+        }
+        .whatsapp-btn:hover { transform: scale(1.08) translateY(-5px); }
+
+        /* --- Footer --- */
+        footer {
+            padding: 60px 10%;
+            text-align: center;
+            border-top: 1px solid #111;
+            color: #444;
+            font-size: 0.8rem;
+        }
+
+        /* --- Mobile Optimization --- */
+        @media (max-width: 768px) {
+            .nav-links { display: none; }
+            .hero-brand { font-size: 4.2rem; letter-spacing: -3px; }
+            .section-title { font-size: 2.4rem; }
+            .service-card { padding: 40px 30px; }
+            .whatsapp-btn { padding: 15px 25px; bottom: 20px; right: 20px; font-size: 0.8rem; }
+        }
+    </style>
+</head>
+<body>
+
+    <nav id="navbar">
+        <div class="nav-logo">
+            <span class="nav-genti">GENTI</span><span class="nav-term">TERM</span>
+        </div>
+        <div class="nav-links">
+            <a href="#sherbimet">Shërbimet</a>
+            <a href="#partneret">Kualiteti</a>
+            <a href="https://wa.me/38344000000">Kontakti</a>
+        </div>
+    </nav>
+
+    <section class="hero">
+        <div class="hero-brand" data-aos="zoom-in" data-aos-duration="1200">
+            <span class="genti-text">GENTI</span><br>
+            <span class="term-text">TERM</span>
+        </div>
+        <p class="hero-tag" data-aos="fade-up" data-aos-delay="600">Cilësia që ngroh shtëpinë tuaj</p>
+        <div style="margin-top: 40px;" data-aos="fade-up" data-aos-delay="900">
+            <a href="#sherbimet" style="color: white; text-decoration: none; font-size: 0.9rem; font-weight: 600; border-bottom: 2px solid var(--blue); padding-bottom: 6px;">Zbuloni Shërbimet</a>
+        </div>
+    </section>
+
+    <section id="sherbimet">
+        <span class="section-label" data-aos="fade-right">Ekspertizë Profesionale</span>
+        <h2 class="section-title" data-aos="fade-right" data-aos-delay="200">Zgjidhje që zgjasin.</h2>
+        
+        <div class="services-grid">
+            <div class="service-card" data-aos="fade-up">
+                <h3>Nxemja Qendrore</h3>
+                <p>Instalime moderne nën dysheme dhe me radiatorë, duke përdorur teknologjinë më të fundit për efikasitet termik.</p>
+            </div>
+            <div class="service-card" data-aos="fade-up" data-aos-delay="200">
+                <h3>Instalimi i Ujit</h3>
+                <p>Rrjeti i ujësjellësit dhe kanalizimit me precizitet të lartë, duke garantuar siguri maksimale në shtëpinë tuaj.</p>
+            </div>
+            <div class="service-card" data-aos="fade-up" data-aos-delay="400">
+                <h3>Pompat Termike</h3>
+                <p>Efiçiencë maksimale e energjisë dhe kursim afatgjatë me sistemet tona të pompave termike ajër-ujë.</p>
+            </div>
+        </div>
+    </section>
+
+    <section id="partneret" class="partners">
+        <h2 style="font-size: 1.2rem; opacity: 0.5; letter-spacing: 4px; font-weight: 400;">BASHKËPUNOJMË ME LIDERËT</h2>
+        <div class="partner-list">
+            <span>REHAU</span>
+            <span>VAILLANT</span>
+            <span>WILO</span>
+            <span>DANFOSS</span>
+            <span>HERZ</span>
+        </div>
+    </section>
+
+    <a href="https://wa.me/38344000000" class="whatsapp-btn">
+        <svg width="20" height="20" fill="currentColor" viewBox="0 0 16 16">
+            <path d="M13.601 2.326A7.854 7.854 0 0 0 7.994 0C3.627 0 .068 3.558.064 7.926c0 1.399.366 2.76 1.057 3.965L0 16l4.204-1.102a7.933 7.933 0 0 0 3.79.965h.004c4.368 0 7.926-3.558 7.93-7.93A7.898 7.898 0 0 0 13.6 2.326zM7.994 14.521a6.573 6.573 0 0 1-3.356-.92l-.24-.144-2.494.654.666-2.433-.156-.251a6.56 6.56 0 0 1-1.007-3.505c0-3.626 2.957-6.584 6.591-6.584a6.56 6.56 0 0 1 4.66 1.931 6.557 6.557 0 0 1 1.928 4.66c-.004 3.639-2.961 6.592-6.592 6.592zm3.615-4.934c-.197-.099-1.17-.578-1.353-.646-.182-.065-.315-.099-.445.099-.133.197-.513.646-.627.775-.114.133-.232.148-.43.05-.197-.1-.836-.308-1.592-.985-.59-.525-.985-1.175-1.103-1.372-.114-.198-.011-.304.088-.403.087-.088.197-.232.296-.346.1-.114.133-.198.198-.33.065-.134.034-.248-.015-.347-.05-.099-.445-1.076-.612-1.47-.16-.389-.323-.335-.445-.34-.114-.007-.247-.007-.38-.007a.729.729 0 0 0-.529.247c-.182.198-.691.677-.691 1.654 0 .977.71 1.916.81 2.049.098.133 1.394 2.132 3.383 2.992.47.205.84.326 1.129.418.475.152.904.129 1.246.08.38-.058 1.171-.48 1.338-.943.164-.464.164-.86.114-.943-.049-.084-.182-.133-.38-.232z"/>
+        </svg>
+        BISEDONI NË WHATSAPP
+    </a>
+
+    <footer>
+        <div style="font-weight: 800; font-size: 1rem; margin-bottom: 15px;">
+            <span style="color:var(--blue)">GENTI</span><span style="color:var(--red)">TERM</span>
+        </div>
+        <p>© 2026 GENTI TERM. Të gjitha të drejtat e rezervuara.</p>
+    </footer>
+
+    <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+    <script>
+        AOS.init();
+
+        // Ndryshimi i navbar-it gjatë scroll
+        window.onscroll = function() {
+            var nav = document.getElementById('navbar');
+            if (window.pageYOffset > 100) {
+                nav.style.padding = "15px 8%";
+                nav.style.background = "rgba(0,0,0,0.95)";
+            } else {
+                nav.style.padding = "20px 8%";
+                nav.style.background = "rgba(0,0,0,0.8)";
+            }
+        };
+    </script>
+</body>
+</html>
